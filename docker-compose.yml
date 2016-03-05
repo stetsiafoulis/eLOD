@@ -1,0 +1,34 @@
+version: '2'
+services:
+ 
+ mysql:
+    build: . 
+    container_name: eLodDrupalmySQL
+    image: mysql:5.6
+    volumes:
+     - /mysql_drupal:/var/lib/mysql 
+    environment:
+    - MYSQL_ROOT_PASSWORD=eLodmysqlpass 
+    restart: always
+
+ drupal: 
+    build: .
+    command:
+    - /start.sh 
+    depends_on:
+    - mysql
+    container_name: eLodDrupal
+    image: eLodDrupal 
+    ports: 
+    - "8080:80"
+    volumes:
+    - "/data_drupal: /var/www/html" 
+    hostname: drupal8003
+    links:
+    - "mysql"
+    environment:
+     - MYSQL_DATABASE= drupalelod
+     - MYSQL_USER= root
+     - DRUPAL_PASSWORD= eLodmysqlpass
+     - MYSQL_HOST= eLodDrupalmySQL
+    restart: always
