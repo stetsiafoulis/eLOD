@@ -2,28 +2,39 @@ version: '2'
 services:
  
  mysql:
-    build: . 
+    build: ./mysql-docker/5.6 
     container_name: eLodDrupalmySQL
-    image: mysql:5.6
+    #image: mysql:5.6
     volumes:
      - /mysql_drupal:/var/lib/mysql 
     environment:
     - MYSQL_ROOT_PASSWORD=eLodmysqlpass 
     restart: always
 
+ virtuoso:
+   build: ./docker-virtuoso
+   container_name: eLodVirtuoso
+   ports:
+   - 8890:8890
+   volumes:
+   - /virtuoso/db:/var/lib/virtuoso/db 
+   environment:
+   - DBA_PASSWORD=eLodVir 
+   - SPARQL_UPDATE=true 
+   - DEFAULT_GRAPH=http://localhost:8890/DAV 
+ 
  drupal: 
-    build: .
+    build: ./docker-drupal
     command:
     - /start.sh 
     depends_on:
     - mysql
     container_name: eLodDrupal
-    image: eLodDrupal 
+    #image: eLodDrupal 
     ports: 
-    - "8080:80"
+    - "8081:80"
     volumes:
     - "/data_drupal: /var/www/html" 
-    hostname: drupal8003
     links:
     - "mysql"
     environment:
