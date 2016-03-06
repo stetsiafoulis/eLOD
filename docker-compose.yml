@@ -8,7 +8,8 @@ services:
     volumes:
      - /mysql_drupal:/var/lib/mysql 
     environment:
-    - MYSQL_ROOT_PASSWORD=eLodmysqlpass 
+     - MYSQL_DATABASE=drupalelod
+     - MYSQL_ROOT_PASSWORD=eLodmysqlpass
     restart: always
 
  virtuoso:
@@ -34,12 +35,15 @@ services:
     ports: 
     - "8081:80"
     volumes:
-    - "/data_drupal: /var/www/html" 
+    - "/data_drupal:/var/www/html" 
     links:
     - "mysql"
     environment:
-     - MYSQL_DATABASE= drupalelod
-     - MYSQL_USER= root
-     - DRUPAL_PASSWORD= eLodmysqlpass
-     - MYSQL_HOST= eLodDrupalmySQL
+     - MYSQL_DATABASE=drupalelod
+     - MYSQL_USER=root
+     - MYSQL_PASSWORD=eLodmysqlpass
+     - DRUPAL_ADMIN_PW=eLODDR
+     - DRUPAL_ADMIN=admin
+     - MYSQL_HOST=eLodDrupalmySQL
+     - DRUPAL_ADMIN_EMAIL=stetsiafoulis@gmail.com
     restart: always
