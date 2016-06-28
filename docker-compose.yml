@@ -16,7 +16,7 @@ services:
    build: ./docker-virtuoso
    container_name: eLodVirtuoso
    ports:
-   - 8890:8890
+   - "8890:8890"
    volumes:
    - /virtuoso/db:/var/lib/virtuoso/db 
    environment:
