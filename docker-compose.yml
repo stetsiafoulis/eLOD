@@ -54,7 +54,8 @@ services:
     - PASS=docker
 
  qgisdesktop:
-  image: kartoza/qgis-desktop:2.14
+  #image: kartoza/qgis-desktop:2.14
+  build: ./qgis-desktop/2.14  
   hostname: qgis-server
   volumes:
 	# Wherever you want to mount your data from
