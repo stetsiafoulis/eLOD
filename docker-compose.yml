@@ -60,7 +60,7 @@ services:
    volumes:
     #Wherever you want to mount your data from
    - ./gis:/gis
-	 #Unix socket for X11
+    #Unix socket for X11
    - "/tmp/.X11-unix:/tmp/.X11-unix"
    links:
    - db:db
